@@ -1,5 +1,9 @@
 # MicroPOP32
-Minimal POP32 library for Line Follower robot
+Fast, efficient and minimal POP32 library for Line Follower robot.
+
+## Installation
+This library is mainly developed on PlatformIO, There might be issues with using it on Arduino IDE.
+Same as POP32, Board must be selected to STM32F103CBT6 if you're using PlatformIO, or POP32 on Arduino IDE.
 
 ## Usage
 ### Options
