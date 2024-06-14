@@ -19,10 +19,10 @@ void initMotor()
   motorInitialized = true;
   pinMode(M1DIR, OUTPUT);
   pinMode(M2DIR, OUTPUT);
-  digitalWrite(M1EN, LOW);
-  digitalWrite(M2EN, LOW);
   pinMode(M1EN, OUTPUT);
   pinMode(M2EN, OUTPUT);
+  digitalWrite(M1EN, LOW);
+  digitalWrite(M2EN, LOW);
   __M1DIR_OUT0
   __M2DIR_OUT0
 }
@@ -34,15 +34,11 @@ void motor(int powl, int powr)
     __M1DIR_OUT0 else __M1DIR_OUT1;
   if (powr >= 0)
     __M2DIR_OUT0 else __M2DIR_OUT1;
-  analogWrite(M1EN, constrain((powl * 255) / 100, -255, 255));
-  analogWrite(M2EN, constrain((powr * 255) / 100, -255, 255));
+  analogWrite(M1EN, min((abs(powl) * 255) / 100, 255));
+  analogWrite(M2EN, min((abs(powr) * 255) / 100, 255));
 }
 void motor(int pow) { motor(pow, pow); };
 void motor() { motor(0, 0); };
-void initVariant()
-{
-  initMotor();
-}
 #endif
 void OK()
 {
@@ -66,14 +62,39 @@ void beep() { beep(100); };
 
 // Optional
 
-#if __has_include(<OLED_I2C_SSD1309.h>)
+#if __has_include(<OLED_I2C_SSD1309.h>) && !defined(NO_OLED)
 #include <OLED_I2C_SSD1309.h>
 #define OLED_RESET -1
 OLED_I2C_SSD1309 oled(OLED_RESET);
+#define OLED
 #else
 #warning "OLED_I2C_SSD1309.h not found, oled will not be initialized"
 #endif
 
 #include <Extra.cpp>
+
+void initVariant()
+{
+#ifndef NO_MOTOR
+  initMotor();
+#endif
+  analogReadResolution(12);
+#ifdef OLED
+  Wire.setSDA(PB9);
+  Wire.setSCL(PB8);
+  Wire.begin();
+  oled.begin(SSD1309_SWITCHCAPVCC, 0x3C);
+  oled.clear();
+  oled.show();
+#endif
+#ifdef EXTRA_MOTORS
+  pinMode(M3DIR, OUTPUT);
+  pinMode(M4DIR, OUTPUT);
+  pinMode(M3EN, OUTPUT);
+  pinMode(M4EN, OUTPUT);
+  digitalWrite(M3EN, LOW);
+  digitalWrite(M4EN, LOW);
+#endif
+}
 
 #endif
