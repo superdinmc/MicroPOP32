@@ -14,6 +14,8 @@ Same as POP32, Board must be selected to STM32F103CBT6 if you're using PlatformI
 #define EXTRA_MOTORS
 // Disable motor module entirely, saves about 10Kb of flash
 #define NO_MOTOR
+// Disable detection of OLED_I2C_SSD1309 and proceed without OLED
+#define NO_OLED
 // Include MUST BE AFTER options define
 #include <MicroPOP32.cpp>
 ```
@@ -25,7 +27,8 @@ Same as POP32, Board must be selected to STM32F103CBT6 if you're using PlatformI
    - Set motor 1 & 2's speed, recommended for robots.
    - Will be disabled if `NO_MOTOR` is set.
  - `OLED_I2C_SSD1309 oled`
-   - OLED class, OLED_I2C_SSD1309 needs to be installed to be enabled automatically.
+   - Pre-initialized OLED Class.
+   - Will be disabled if `NO_OLED` is set or OLED_I2C_SSD1309 is not found.
  - `beep(int time = 100): void`
    - Turn on the buzzer for `time` ms.
    - Defaults to 100ms.
