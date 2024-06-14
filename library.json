@@ -1,0 +1,22 @@
+{
+	"$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
+	"name": "MicroPOP32",
+	"description": "Fast, efficient and minimal POP32 library for Line Follower robot",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"email": "superdinmc@dreamnity.in",
+			"name": "Bhuwana Tawal-unnop",
+			"url": "https://github.com/superdinmc"
+		}
+	],
+	"license": "MIT",
+	"repository": {
+		"branch": "main",
+		"type": "git",
+		"url": "https://github.com/superdinmc/MicroPOP32"
+	},
+	"frameworks": ["arduino"],
+	"platforms": ["genericSTM32F103CB"],
+	"keywords": ["POP32", "INEX"]
+}
