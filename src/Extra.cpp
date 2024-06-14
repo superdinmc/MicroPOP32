@@ -3,6 +3,8 @@
 #ifdef NO_MOTOR
 #error "Extra motors module cannot be used when motor control is disabled"
 #endif
+#define M3DIR PB13
+#define M4DIR PB12
 #define M3EN PA10
 #define M4EN PB4
 const int _OUT0[4] = {
@@ -27,8 +29,8 @@ void m(int num, int pow)
   if (pow >= 0)
     GPIOB->ODR &= _OUT0[id];
   else
-    GPIOB->ODR &= _OUT1[id];
-  analogWrite(_EN[id], constrain((pow * 255) / 100, -255, 255));
+    GPIOB->ODR |= _OUT1[id];
+  analogWrite(_EN[id], min((abs(pow) * 255) / 100, 255));
 }
 #endif
 #ifdef EXTRA_ALIASES
