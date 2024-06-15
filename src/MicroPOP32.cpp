@@ -43,7 +43,6 @@ void motor() { motor(0, 0); };
 void OK()
 {
   // Delay to prevent falsy voltage readings on startup
-  pinMode(9, INPUT);
   if (millis() < 200)
     delay(200 - millis());
   while (analogRead(9) > 12)
@@ -88,12 +87,17 @@ void initVariant()
   oled.show();
 #endif
 #ifdef EXTRA_MOTORS
+  pinMode(9, INPUT);
   pinMode(M3DIR, OUTPUT);
   pinMode(M4DIR, OUTPUT);
   pinMode(M3EN, OUTPUT);
   pinMode(M4EN, OUTPUT);
   digitalWrite(M3EN, LOW);
   digitalWrite(M4EN, LOW);
+#endif
+#ifndef NO_EXTRA_BUTTONS
+  pinMode(PC13, INPUT_PULLUP);
+  pinMode(PB2, INPUT_PULLDOWN);
 #endif
 }
 

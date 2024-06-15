@@ -40,3 +40,18 @@ void m(int num, int pow)
 #define o digitalWrite
 #define b beep
 #endif
+#ifndef NO_EXTRA_BUTTONS
+#define ok() (analogRead(9)<16)
+#define sw_A() !digitalRead(PC13)
+#define sw_B() digitalRead(PB2)
+#define wait_A()  \
+  while (!sw_A()) \
+  {               \
+    delay(1);     \
+  }
+#define wait_B()  \
+  while (!sw_B()) \
+  {               \
+    delay(1);     \
+  }
+#endif
