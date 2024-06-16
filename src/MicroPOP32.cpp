@@ -45,14 +45,13 @@ void OK()
   // Delay to prevent falsy voltage readings on startup
   if (millis() < 200)
     delay(200 - millis());
-  while (analogRead(9) > 12)
+  while (analogRead(9) > 16)
     ;
-  while (analogRead(9) < 5)
+  while (analogRead(9) <= 16)
     ;
 }
 void beep(int time)
 {
-  pinMode(PB5, OUTPUT);
   analogWrite(PB5, 100);
   delay(time);
   analogWrite(PB5, 0);
@@ -78,6 +77,7 @@ void initVariant()
   initMotor();
 #endif
   analogReadResolution(12);
+  pinMode(PB5, OUTPUT);
 #ifdef OLED
   Wire.setSDA(PB9);
   Wire.setSCL(PB8);
