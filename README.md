@@ -12,8 +12,7 @@ Same as POP32, Board must be selected to STM32F103CBT6 if you're using PlatformI
 ### Options
 
 ``` cpp
-// Enable motor expansion
-// m(int id, int power) is included
+// Enable motor function expansion
 // Full 4 motors can be used(Default 2)
 #define EXTRA_MOTORS
 // Disable motor module entirely, saves about 10Kb of flash
@@ -35,6 +34,9 @@ Same as POP32, Board must be selected to STM32F103CBT6 if you're using PlatformI
 * `motor(int powl: -100 - 100, int powr: -100 - 100): void`
     * Set motor 1 & 2's speed, recommended for robots.
     * Will be disabled if `NO_MOTOR` is set.
+* `ao(): void`
+    * Stop all motors
+    * Requires `EXTRA_MOTORS`
 * `OLED_I2C_SSD1309 oled`
     * Pre-initialized OLED Class.
     * Will be disabled if `NO_OLED` is set or OLED\_I2C\_SSD1309 is not found.
