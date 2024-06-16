@@ -22,7 +22,13 @@ const int _EN[4] = {
     M2EN,
     M3EN,
     M4EN};
-
+#define ao() \
+  {          \
+    m(1, 0); \
+    m(2, 0); \
+    m(3, 0); \
+    m(4, 0); \
+  }
 void m(int num, int pow)
 {
   int id = num - 1;
